@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!--数据库驱动 -->
+	<classPathEntry location="D:/dev/repo/maven/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- 分页插件 -->
+		<plugin type="com.sword.smvcm.mybatis.plugin.MySQLPaginationPlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<!--数据库链接地址账号密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/db_smvcm" userId="root" password="root">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!--生成Model类存放位置 -->
+		<javaModelGenerator targetPackage="com.sword.smvcm.users.pojo"
+			targetProject="smvcm-facade-users">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!--生成映射文件存放位置 -->
+		<sqlMapGenerator targetPackage="com.sword.smvcm.users.mapper"
+			targetProject="smvcm-service-users">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!--生成Dao类存放位置 -->
+		<javaClientGenerator targetPackage="com.sword.smvcm.users.mapper"
+			type="XMLMAPPER" targetProject="smvcm-service-users">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!-- 用户 -->
+		<table tableName="tb_user" domainObjectName="TbUser"
+			enableCountByExample="false" enableUpdateByExample="true"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
+		</table>
+		
+		<!-- 成员 -->
+		<table tableName="tb_user_member" domainObjectName="TbMember"
+			enableCountByExample="false" enableUpdateByExample="true"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
+		</table>
+		
+		<!-- 用户角色关系-->
+		<table tableName="tb_user_role" domainObjectName="TbUserRole"
+			enableCountByExample="false" enableUpdateByExample="true"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
+		</table>
+		
+		<!-- 角色对应权限 -->
+		<table tableName="tb_role_permission" domainObjectName="TbRolePermission"
+			enableCountByExample="false" enableUpdateByExample="true"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
+		</table>
+		
+		<!-- 角色 -->
+		<table tableName="tb_role" domainObjectName="TbRole"
+			enableCountByExample="false" enableUpdateByExample="true"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
+		</table>
+	</context>
+</generatorConfiguration>
