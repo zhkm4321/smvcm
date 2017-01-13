@@ -7,7 +7,30 @@ package com.sword.smvcm.exception;
  */
 public class AjaxException extends SmvcmException {
 
-  public AjaxException(String message) {
-    super(message);
+  private String code;
+
+  private String message;
+
+  public AjaxException(String code, String message) {
+    super(code + ":" + message);
+    this.message = message;
+    this.code = code;
   }
+
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
 }
