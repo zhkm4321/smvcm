@@ -8,20 +8,15 @@ import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 
 import com.sword.smvcm.exception.SmvcmException;
+import com.sword.smvcm.shiro.ShiroConstants;
 import com.sword.smvcm.utils.CaptchaUtils;
 
 public class KCaptchaValidateFilter extends AccessControlFilter {
 
   private boolean captchaEbabled = true;// 是否开启验证码支持
 
-  private String failureKeyAttribute = "shiroLoginFailure"; // 验证失败后存储到的属性名
-
   public void setCaptchaEbabled(boolean captchaEbabled) {
     this.captchaEbabled = captchaEbabled;
-  }
-
-  public void setFailureKeyAttribute(String failureKeyAttribute) {
-    this.failureKeyAttribute = failureKeyAttribute;
   }
 
   @Override
@@ -42,7 +37,7 @@ public class KCaptchaValidateFilter extends AccessControlFilter {
   @Override
   protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
     // 如果验证码失败了，存储失败key属性
-    request.setAttribute(failureKeyAttribute, SmvcmException.class.getName());
+    request.setAttribute(ShiroConstants.shiroLoginFailure, SmvcmException.class.getName());
     return true;
   }
 

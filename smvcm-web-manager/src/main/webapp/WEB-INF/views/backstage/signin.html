@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="bg-light">
+<head>
+<meta charset="utf-8" />
+<title>微信后台 | Web Application</title>
+<meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<link rel="stylesheet" href="${sysres}/css/app.v2.css" type="text/css" />
+<!--[if lt IE 9]> <script src="${sysres}/js/ie/html5shiv.js" cache="false"></script> <script src="${sysres}/js/ie/respond.min.js" cache="false"></script> <script src="${sysres}/js/ie/excanvas.js" cache="false"></script> <![endif]-->
+</head>
+<body>
+<section id="content" class="m-t-lg wrapper-md animated fadeInUp">
+  <div class="container aside-xxl"> <a class="navbar-brand block" href="index.html">微信后台</a>
+    <section class="panel panel-default bg-white m-t-lg">
+      <header class="panel-heading text-center"> <strong>登&nbsp;录</strong> </header>
+      <form id="login_form" method="POST" action="${cp}/login" class="panel-body wrapper-lg" required>
+        <div class="form-group">
+          <label class="control-label">用户名</label>
+          <input type="text" name="username" placeholder="输入用户名" class="form-control input-lg">
+        </div>
+        <div class="form-group">
+          <label class="control-label">密&nbsp;&nbsp;码</label>
+          <input type="password" id="inputPassword" name="password" placeholder="输入密码" class="form-control input-lg" required>
+        </div>
+        <div class="form-group">
+          <label class="control-label">验证码</label>
+          <div class="captcha-group verify">
+            <input type="text" id="captcha" name="captcha" placeholder="输入验证码" class="form-control input-lg input-s-lg inline" required>${captcha}
+          </div>
+        </div>
+        <button id="login-btn" type="button" class="btn btn-primary">登&nbsp;录</button>
+      </form>
+    </section>
+  </div>
+</section>
+<!-- footer -->
+<footer id="footer">
+  <div class="text-center padder">
+    <p> <small>Web app framework base on Bootstrap<br>
+      &copy; 2013</small> </p>
+  </div>
+</footer>
+<!-- / footer -->
+<script src="${sysres}/js/app.v2.js"></script>
+<script src='${res}/login/javascript/jquery.form.js' type="text/javascript"></script>
+<script src='${res}/login/javascript/layer/layer.js' type="text/javascript"></script>
+<script src='${res}/login/javascript/index.js' type="text/javascript"></script>
+<!-- Bootstrap --><!-- App -->
+<script type="text/javascript">
+$('.captcha').hover(function(){
+	layer.tips("看不清？点击更换", '.verify', {
+		time: 6000,
+		tips: [2, "#3c3c3c"]
+	})
+},function(){
+	layer.closeAll('tips');
+}).click(function(){
+	$(this).attr('src','${cp}/captcha.jpg?id=' + Math.random());
+});
+$("#login-btn").click(function(){
+	var ajax_option={
+		dataType:"json",
+		success:loginSuccess,
+		error:loginFaile
+	}
+	$('#login_form').ajaxSubmit(ajax_option);
+});
+function loginSuccess(data){
+		ajaxHandle(data,function(result){
+			redirect("${cp}/wxbackstage/index");
+		},function(result){
+			reloadCaptcha("${cp}");
+			layer.msg(result.message);
+		})
+	}
+	function loginFaile(){
+		reloadCaptcha("${cp}");
+		layer.msg("网络异常")
+	}
+</script>
+</body>
+</html>

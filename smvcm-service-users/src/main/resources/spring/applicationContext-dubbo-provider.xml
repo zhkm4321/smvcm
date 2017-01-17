@@ -8,10 +8,10 @@
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="goshop-service-users"  />
+    <dubbo:application name="smvcm-service-users"  />
 
     <!-- 使用redis中心暴露发现服务地址-->
-    <dubbo:registry  address="${dubbo.address}"  check="false" />
+    <dubbo:registry  address="${dubbo.registry.address}"  check="false"/>
     <!-- 使用multicast广播注册中心暴露发现服务地址
     <dubbo:registry address="multicast://224.5.6.7:1234?unicast=false" check="false"/>-->
     <!-- zookeeper注册中心
@@ -28,10 +28,6 @@
     <dubbo:protocol name="dubbo"  dispatcher="all" threadpool="fixed" threads="20" port="28880" />
 
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service  retries="0" interface="org.goshop.users.i.UserService" ref="userService"  />
-
-    <dubbo:service  retries="0" interface="org.goshop.users.i.MemberService" ref="memberService"  />
-
-    <dubbo:service  retries="0" interface="org.goshop.users.i.AdminService" ref="adminService"  />
+    <dubbo:service interface="com.sword.smvcm.users.i.UserService" ref="userService" retries="0" timeout="20000"/>
 
 </beans>

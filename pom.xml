@@ -9,14 +9,21 @@
 	<modules>
 		<module>smvcm-common</module>
 		<module>smvcm-common-config</module>
-		<module>smvcm-service-users</module>
-		<module>smvcm-facade-users</module>
 		<module>smvcm-common-shiro</module>
 		<module>smvcm-common-web</module>
+		<module>smvcm-facade-email</module>
+		<module>smvcm-facade-users</module>
+		<module>smvcm-facade-wxmenu</module>
+		<module>smvcm-service-users</module>
+		<module>smvcm-service-email</module>
+		<module>smvcm-service-wxmenu</module>
+		<module>smvcm-web-manager</module>
 	</modules>
 	<properties>
 		<java.version>1.7</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<smvcm-version>0.0.1-SNAPSHOT</smvcm-version>
+		<weixin-java-mp-version>2.4.0</weixin-java-mp-version>
 		<spring-version>4.3.3.RELEASE</spring-version>
 		<shiro-version>1.2.4</shiro-version>
 		<mybatis-version>3.3.0</mybatis-version>
@@ -25,20 +32,28 @@
 		<mybatis-ehcache-version>1.0.3</mybatis-ehcache-version>
 		<ehcache-version>2.10.2</ehcache-version>
 		<mysql-connector-java-version>5.1.38</mysql-connector-java-version>
+		<commons-lang-version>2.6</commons-lang-version>
+		<commons-lang3.version>3.3.2</commons-lang3.version>
+		<commons-io-version>1.3.2</commons-io-version>
+		<commons-net-version>3.3</commons-net-version>
+		<commons-pool2-version>2.3</commons-pool2-version>
 		<jstl-version>1.2</jstl-version>
 		<jackson-version>1.9.13</jackson-version>
 		<httpclient-version>4.5.2</httpclient-version>
-		<jackson.version>2.4.2</jackson.version>
+		<jackson-version>2.4.2</jackson-version>
 		<druid-version>1.0.23</druid-version>
 		<kaptcha-version>0.0.9</kaptcha-version>
+		<solr-solrj-version>6.3.0</solr-solrj-version>
 		<dubbo-version>2.5.3</dubbo-version>
 		<zookeeper-version>3.4.6</zookeeper-version>
 		<zkclient-version>0.1</zkclient-version>
+		<mail-version>1.4.7</mail-version>
 		<freemarker-version>2.3.23</freemarker-version>
+		<rapid-framework-version>4.0.5</rapid-framework-version>
 		<fastjson-version>1.2.21</fastjson-version>
 		<fastdfs-client-version>1.25</fastdfs-client-version>
 		<activemq-all-version>5.11.1</activemq-all-version>
-		<jedis-version>2.9.0</jedis-version>
+		<jedis-version>2.1.0</jedis-version>
 		<logback-version>1.1.3</logback-version>
 		<lib.exclude>alljars</lib.exclude>
 	</properties>
@@ -62,13 +77,45 @@
 			</dependency>
 			<dependency>
 				<groupId>com.sword</groupId>
+				<artifactId>smvcm-common-web</artifactId>
+				<version>${smvcm-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sword</groupId>
 				<artifactId>smvcm-facade-users</artifactId>
+				<version>${smvcm-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sword</groupId>
+				<artifactId>smvcm-facade-email</artifactId>
+				<version>${smvcm-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sword</groupId>
+				<artifactId>smvcm-facade-wxmenu</artifactId>
 				<version>${smvcm-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.sword</groupId>
 				<artifactId>smvcm-service-users</artifactId>
 				<version>${smvcm-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sword</groupId>
+				<artifactId>smvcm-service-email</artifactId>
+				<version>${smvcm-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sword</groupId>
+				<artifactId>smvcm-service-wxmenu</artifactId>
+				<version>${smvcm-version}</version>
+			</dependency>
+
+			<!-- 微信SDK -->
+			<dependency>
+				<groupId>com.github.binarywang</groupId>
+				<artifactId>weixin-java-mp</artifactId>
+				<version>${weixin-java-mp-version}</version>
 			</dependency>
 
 			<!-- spring -->
@@ -171,7 +218,7 @@
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
-				<version>${jackson.version}</version>
+				<version>${jackson-version}</version>
 			</dependency>
 
 			<!-- mybatis -->
@@ -193,6 +240,13 @@
 				<version>${mybatis-ehcache-version}</version>
 			</dependency>
 
+			<!-- solr客户端 -->
+			<dependency>
+				<groupId>org.apache.solr</groupId>
+				<artifactId>solr-solrj</artifactId>
+				<version>${solr-solrj-version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>net.sf.ehcache</groupId>
 				<artifactId>ehcache</artifactId>
@@ -203,6 +257,27 @@
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql-connector-java-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${commons-lang-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-net</groupId>
+				<artifactId>commons-net</artifactId>
+				<version>${commons-net-version}</version>
 			</dependency>
 
 			<!-- Logger -->
@@ -270,6 +345,10 @@
 						<groupId>commons-logging</groupId>
 						<artifactId>commons-logging</artifactId>
 					</exclusion>
+					<exclusion>
+						<artifactId>netty</artifactId>
+						<groupId>org.jboss.netty</groupId>
+					</exclusion>
 				</exclusions>
 			</dependency>
 
@@ -289,6 +368,12 @@
 				<groupId>org.freemarker</groupId>
 				<artifactId>freemarker</artifactId>
 				<version>${freemarker-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.googlecode.rapid-framework</groupId>
+				<artifactId>rapid-core</artifactId>
+				<version>${rapid-framework-version}</version>
 			</dependency>
 
 			<!-- zookeeper -->
@@ -313,6 +398,19 @@
 				<groupId>org.apache.activemq</groupId>
 				<artifactId>activemq-pool</artifactId>
 				<version>${activemq-all-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-pool2</artifactId>
+				<version>${commons-pool2-version}</version>
+			</dependency>
+
+			<!-- 邮件发送 -->
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>${mail-version}</version>
 			</dependency>
 
 			<dependency>
@@ -368,6 +466,14 @@
 				<groupId>redis.clients</groupId>
 				<artifactId>jedis</artifactId>
 				<version>${jedis-version}</version>
+			</dependency>
+			<!-- Hamcrest is a library of matchers, which can be combined in to create 
+				flexible expressions of intent in tests -->
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-all</artifactId>
+				<version>1.3</version>
+				<scope>test</scope>
 			</dependency>
 
 			<!-- 打包的时候不包含 -->

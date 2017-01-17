@@ -16,6 +16,7 @@ import org.apache.shiro.util.ByteSource;
 
 import com.sword.smvcm.users.i.UserService;
 import com.sword.smvcm.users.pojo.TbRole;
+import com.sword.smvcm.users.pojo.TbRolePermission;
 import com.sword.smvcm.users.pojo.TbUser;
 
 public class CustomRealm extends AuthorizingRealm {
@@ -47,10 +48,9 @@ public class CustomRealm extends AuthorizingRealm {
     // 第二步：根据用户输入的userCode从数据库查询
     TbUser user = null;
     try {
-      user = userService.findByUserName(loginName);
+      user = userService.findUserByUsername(loginName);
     }
     catch (Exception e1) {
-      // TODO Auto-generated catch block
       e1.printStackTrace();
     }
 
@@ -90,33 +90,26 @@ public class CustomRealm extends AuthorizingRealm {
     TbUser activeUser = (TbUser) principals.getPrimaryPrincipal();
 
     // 从数据库获取角色
-    List<TbRole> roleList = userService.findRoleByUserId(activeUser.getId());
+    List<TbRole> roleList = userService.findUserRole(activeUser);
+    List<TbRolePermission> permissionList = userService.findUserPermission(activeUser);
     List<String> roles = new ArrayList<String>();
     if (roleList != null) {
       for (TbRole r : roleList) {
         // 将数据库中的权限标签 符放入集合
-        roles.add(r.getName());
+        roles.add(r.getValue());
       }
     }
     // 根据身份信息获取权限信息
     // 从数据库获取到权限数据
-    /*
-     * List<Permission> permissionList = null; try { permissionList =
-     * userService.findPermissionListByUserId(activeUser.getId()); } catch
-     * (Exception e) { // TODO Auto-generated catch block e.printStackTrace(); }
-     * //单独定一个集合对象 List<String> permissions = new ArrayList<String>();
-     * if(permissionList!=null){ for(Permission permission:permissionList){
-     * //将数据库中的权限标签 符放入集合 permissions.add(permission.getPerCode()); } }
-     */
 
-    /*
-     * List<String> permissions = new ArrayList<String>();
-     * permissions.add("user:create");//用户的创建
-     * permissions.add("item:query");//商品查询权限
-     * permissions.add("item:add");//商品添加权限
-     * permissions.add("item:edit");//商品修改权限
-     */
-    // ....
+    // 单独定一个集合对象
+    List<String> permissions = new ArrayList<String>();
+    if (permissionList != null) {
+      for (TbRolePermission permission : permissionList) {
+        // 将数据库中的权限标签 符放入集合
+        permissions.add(permission.getValue());
+      }
+    }
 
     // 查到权限数据，返回授权信息(要包括 上边的permissions)
     SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();

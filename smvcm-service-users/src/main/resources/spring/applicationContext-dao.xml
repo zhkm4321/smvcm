@@ -21,15 +21,15 @@
 
 	<!-- 配置扫描包，加载mapper代理对象 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="org.goshop.*.mapper.master"></property>
+		<property name="basePackage" value="com.sword.smvcm.users.mapper"></property>
 		<property name="sqlSessionFactoryBeanName" value="masterSqlSessionFactory" />
 	</bean>
+	
 	<!-- 配置sqlsessionFactory -->
 	<bean id="masterSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
+		<property name="configLocation" value="classpath:mybatis/Config.xml"></property>
 		<property name="dataSource" ref="masterDataSource"></property>
 	</bean>
-
 
 	<!-- 事务管理器 -->
 	<bean id="transactionManager"
@@ -37,6 +37,7 @@
 		<!-- 数据源 -->
 		<property name="dataSource" ref="masterDataSource" />
 	</bean>
+	
 	<!-- 通知 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
@@ -52,10 +53,11 @@
 			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
+	
 	<!-- 切面 -->
 	<aop:config>
 		<aop:advisor advice-ref="txAdvice"
-					 pointcut="execution(* org.goshop.*.service.*.*(..))" />
+					 pointcut="execution(* com.sword.smvcm.users.service.*.*(..))" />
 	</aop:config>
 
 	<!-- 从表数据库连接池 -->
@@ -68,14 +70,16 @@
 		<property name="maxActive" value="10" />
 		<property name="minIdle" value="5" />
 	</bean>
+	
 	<!-- 配置扫描包，加载mapper代理对象 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="org.goshop.*.mapper.read"></property>
+		<property name="basePackage" value="com.sword.smvcm.users.mapper"></property>
 		<property name="sqlSessionFactoryBeanName" value="readSqlSessionFactory" />
 	</bean>
+	
 	<!--配置sqlsessionFactory-->
 	<bean id="readSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
+		<property name="configLocation" value="classpath:mybatis/Config.xml"></property>
 		<property name="dataSource" ref="readDataSource"></property>
 	</bean>
 
