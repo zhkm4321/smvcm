@@ -47,7 +47,7 @@ public class AdminController {
    * 
    * @throws IOException
    */
-  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
   @ResponseBody
   public String login(ModelMap model, HttpServletRequest request, HttpSession session) throws IOException {
     Map<String, Object> result = new HashMap<String, Object>();
