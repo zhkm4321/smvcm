@@ -25,7 +25,7 @@
     <dubbo:provider timeout="10000" threadpool="fixed" threads="100" accepts="1000" />
 
     <!--通讯配置-->
-    <dubbo:protocol name="dubbo"  dispatcher="all" threadpool="fixed" threads="20" port="28881" />
+    <dubbo:protocol name="dubbo" serialization="kryo" dispatcher="all" threadpool="fixed" threads="20" port="28881" />
 
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.sword.smvcm.wx.menu.i.MenuService" ref="menuService" retries="0" timeout="20000"/>

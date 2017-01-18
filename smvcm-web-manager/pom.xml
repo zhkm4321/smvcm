@@ -26,6 +26,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.sword</groupId>
+			<artifactId>smvcm-facade-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sword</groupId>
 			<artifactId>smvcm-common</artifactId>
 		</dependency>
 		<dependency>

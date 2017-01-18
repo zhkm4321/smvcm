@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+		
+	<!-- weixinmp模块的配置 -->
+	<bean id="wxMpConfigStorage" class="com.sword.smvcm.service.impl.WxConfigServiceImpl"
+		init-method="init">
+		<property name="configSvc" ref="configService"></property>
+	</bean>
+
+	<!-- weixinmp模块api服务 -->
+	<bean id="wxMpService" class="me.chanjar.weixin.mp.api.impl.WxMpServiceImpl">
+		<property name="wxMpConfigStorage" ref="wxMpConfigStorage"></property>
+	</bean>
+</beans>

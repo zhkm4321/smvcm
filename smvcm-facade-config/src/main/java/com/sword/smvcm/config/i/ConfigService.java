@@ -1,8 +1,10 @@
-package com.sword.smvcm.service;
+package com.sword.smvcm.config.i;
 
 import java.util.List;
 
-import com.sword.smvcm.pojo.TbConfig;
+import org.springframework.beans.factory.BeanFactoryAware;
+
+import com.sword.smvcm.config.pojo.TbConfig;
 
 /**
  * 微信服务端配置服务
@@ -10,7 +12,7 @@ import com.sword.smvcm.pojo.TbConfig;
  * @author zhenghang
  * @version 创建时间：2016年12月11日 下午5:31:24
  */
-public interface ConfigService {
+public interface ConfigService extends BeanFactoryAware {
 
   public static String GLOBAL_CONFIG_PREFIX = "GLOBAL_CONFIG_";
 

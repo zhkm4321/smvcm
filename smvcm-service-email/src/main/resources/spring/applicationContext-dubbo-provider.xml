@@ -25,7 +25,7 @@
     <dubbo:provider timeout="10000" threadpool="fixed" threads="100" accepts="1000" />
 
     <!--通讯配置-->
-    <dubbo:protocol name="dubbo"  dispatcher="all" threadpool="fixed" threads="20" port="28882" />
+    <dubbo:protocol name="dubbo" serialization="kryo" dispatcher="all" threadpool="fixed" threads="20" port="28883" />
 
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service  retries="0" interface="com.sword.smvcm.email.i.EMailService" ref="eMailService"  />

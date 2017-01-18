@@ -14,6 +14,8 @@ public class BaseConstans {
 
   public static final String MSG = "message";
 
+  public static final String RETURN_URL = "return_url";
+
   public static final String DATA = "data";
 
   public static final String CTX_PATH = "cp";

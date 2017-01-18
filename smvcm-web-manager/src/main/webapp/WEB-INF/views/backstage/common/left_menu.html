@@ -22,7 +22,7 @@
         <nav class="nav-primary hidden-xs">
           <ul class="nav">
             <li [#if position=='index']class="active"[/#if]>
-              <a href="index.html" >
+              <a href="${cp}/home" >
                 <i class="fa fa-dashboard icon">
                   <b class="bg-danger"></b>
                 </i>
@@ -30,7 +30,7 @@
               </a>
             </li>
             <li [#if position=='goods']class="active"[/#if]>
-              <a href="${cp}/wxbackstage/goods">
+              <a href="${cp}/goods">
                 <i class="fa fa-file-text icon">
                   <b class="bg-primary"></b>
                 </i>
@@ -38,7 +38,7 @@
               </a>
             </li>
             <li [#if position=='topic']class="active"[/#if]>
-              <a href="${cp}/wxbackstage/topic/list">
+              <a href="${cp}/topic/list">
                 <i class="fa fa-file-text icon">
                   <b class="bg-primary"></b>
                 </i>
@@ -46,7 +46,7 @@
               </a>
             </li>
             <li [#if position=='menu']class="active"[/#if]>
-              <a href="${cp}/wxbackstage/menu/list" >
+              <a href="${cp}/menu/list" >
                 <i class="fa fa-file-text icon">
                   <b class="bg-primary"></b>
                 </i>

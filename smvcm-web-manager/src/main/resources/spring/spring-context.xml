@@ -6,10 +6,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 	<!-- 加载配置文件 -->
 	<context:property-placeholder
-		ignore-resource-not-found="true"
-		location="classpath:common.properties,classpath:resource/*.properties" />
-		
+		ignore-resource-not-found="true" location="classpath:resource/*.properties" />
+
 	<context:component-scan base-package="com.sword.**.service,com.sword.**.context" />
 	
+	<!-- 先加载本地服务 -->
+	<import resource="classpath:spring/applicationContext-*.xml" />
+	<!-- 再加载RPC服务 -->
 	<import resource="classpath:dubbo/dubbo-consumer.xml" />
 </beans>

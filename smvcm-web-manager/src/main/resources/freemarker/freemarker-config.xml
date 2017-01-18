@@ -13,13 +13,16 @@
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	
 	<context:property-placeholder
-		ignore-resource-not-found="true" location="classpath:resource/*.properties" />
+		ignore-resource-not-found="true" location="classpath:resource/resource.properties" />
+
 	<bean id="freemarkerConfiguration"
 		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="location" value="classpath:resource/freemarker.properties" />
-
+		<property name="locations">
+			<list>
+				<value>classpath:freemarker/freemarker.properties</value>
+			</list>
+		</property>
 	</bean>
 
 	<!-- freemaker Directive -->
@@ -62,7 +65,7 @@
 				<entry key="override" value-ref="overrideDirective" />
 				<entry key="block" value-ref="blockDirective" />
 				<entry key="super" value-ref="superDirective" />
-				
+
 				<entry key="uuid" value-ref="uuid" />
 				<entry key="process_time" value-ref="process_time" />
 				<entry key="text_cut" value-ref="text_cut" />
@@ -74,12 +77,12 @@
 		<property name="freemarkerSettings" ref="freemarkerConfiguration">
 		</property>
 	</bean>
-	
-	<!--执行时间标签-->
-	<bean id="uuid" class="com.sword.smvcm.manager.directive.UUIDDirective"/>
-	<bean id="process_time" class="com.sword.smvcm.manager.directive.ProcessTimeDirective"/>
-	<bean id="text_cut" class="com.sword.smvcm.manager.directive.TextCutDirective"/>
-	<bean id="html_cut" class="com.sword.smvcm.manager.directive.HtmlCutDirective"/>
-	<bean id="perm" class="com.sword.smvcm.manager.directive.PermistionDirective"/>
+
+	<!--执行时间标签 -->
+	<bean id="uuid" class="com.sword.smvcm.manager.directive.UUIDDirective" />
+	<bean id="process_time" class="com.sword.smvcm.manager.directive.ProcessTimeDirective" />
+	<bean id="text_cut" class="com.sword.smvcm.manager.directive.TextCutDirective" />
+	<bean id="html_cut" class="com.sword.smvcm.manager.directive.HtmlCutDirective" />
+	<bean id="perm" class="com.sword.smvcm.manager.directive.PermistionDirective" />
 	<bean id="url" class="com.sword.smvcm.manager.directive.UrlDirective" />
 </beans>

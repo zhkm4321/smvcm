@@ -1,36 +1,44 @@
-package com.sword.smvcm.service.impl;
+package com.sword.smvcm.config.service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.sword.smvcm.mapper.TbConfigMapper;
-import com.sword.smvcm.pojo.TbConfig;
-import com.sword.smvcm.pojo.TbConfigExample;
-import com.sword.smvcm.service.ConfigService;
+import com.sword.smvcm.config.i.ConfigService;
+import com.sword.smvcm.config.mapper.TbConfigMapper;
+import com.sword.smvcm.config.pojo.TbConfig;
+import com.sword.smvcm.config.pojo.TbConfigExample;
 import com.sword.smvcm.service.JedisClient;
 import com.sword.smvcm.utils.StringUtils;
 
-@Service
+@Service("configService")
 public class ConfigServiceImpl implements ConfigService {
 
   private static Logger log = LoggerFactory.getLogger(ConfigServiceImpl.class);
 
   private TbConfigMapper configMapper;
 
-  public void setConfigMapper(TbConfigMapper configMapper) {
-    this.configMapper = configMapper;
-  }
-
   @Autowired
+  @Qualifier("jedisClient")
   JedisClient jedisClient;
 
+  @Override
+  public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+    this.configMapper = beanFactory.getBean("tbConfigMapper", TbConfigMapper.class);
+  }
+
+  @PostConstruct
   public void initCache() {
     log.info("【缓存服务器配置开始】");
     List<TbConfig> list = listAll();

@@ -47,8 +47,9 @@ public class EvnInterceptor extends HandlerInterceptorAdapter {
         modelAndView.addObject(BaseConstans.PERMISSION_KEY, getUserPermission(curUser));
       }
       modelAndView.addObject(BaseConstans.CTX_PATH, cp);
-      modelAndView.addObject(BaseConstans.RES, cp + "/res");
-      modelAndView.addObject(BaseConstans.SYSRES, cp + "/backstage");
+      modelAndView.addObject(BaseConstans.RES, cp + "/static");
+      modelAndView.addObject(BaseConstans.SYSRES, cp + "/static");// cp +
+                                                                  // "/backstage"
       Long stime = (Long) request.getAttribute("start_time");
       modelAndView.addObject(BaseConstans.START_TIME, stime);
     }

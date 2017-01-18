@@ -1,9 +1,10 @@
 # dubbo版smvcm系统demo
 技术选型：<br /\>
-springmvc<br /\>
-mybatis<br /\>
-mysql<br /\>
-dubbo2.5.3(准备转dubbox2.8.4坑)<br /\>
+jdk				1.7+<br /\>
+springmvc		4.3.3.RELEASE<br /\>
+mybatis			3.3.0<br /\>
+mysql			<br /\>
+dubbox			2.8.4<br /\>
 ### 工程备注<br /\>
 smvcm-facade-users			用户名服务消费者模块<br /\>
 smvcm-facade-email			邮件服务消费者模块<br /\>

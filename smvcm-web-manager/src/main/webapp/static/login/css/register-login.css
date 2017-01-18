@@ -166,7 +166,7 @@ canvas {
 	border-top: 1px solid #e8e8e8;
 }
 
-.captcha {
+#codeimage {
 	width: 25rem;
     height: 10rem;
     position: absolute;
