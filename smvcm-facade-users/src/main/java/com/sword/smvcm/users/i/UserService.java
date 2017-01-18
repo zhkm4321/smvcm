@@ -2,24 +2,26 @@ package com.sword.smvcm.users.i;
 
 import java.util.List;
 
+import com.sword.smvcm.service.IService;
 import com.sword.smvcm.users.pojo.TbRole;
 import com.sword.smvcm.users.pojo.TbRolePermission;
 import com.sword.smvcm.users.pojo.TbUser;
 
-public interface UserService {
-  public TbUser findUserById(Integer userId);
+public interface UserService extends IService<TbUser> {
 
-  public TbUser findUserByUsername(String username);
+  public TbUser getByUsername(String username);
 
-  public TbUser findUserByMobile(String mobile);
+  public TbUser getByMobile(String mobile);
 
-  public List<TbRolePermission> findUserPermission(TbUser user);
+  public List<TbUser> selectByUser(TbUser user, int page, int row);
 
-  public List<TbRolePermission> findUserPermissionByUsername(String username);
+  public List<TbRolePermission> selectUserPermission(TbUser user);
 
-  public List<TbRole> findUserRole(TbUser user);
+  public List<TbRolePermission> selectUserPermission(String username);
 
-  public List<TbRole> findUserRoleByUsername(String username);
+  public List<TbRole> selectUserRole(TbUser user);
+
+  public List<TbRole> selectUserRole(String username);
 
   /**
    * 密码与用户是否对应
@@ -39,10 +41,4 @@ public interface UserService {
   public int isNewPasswordValid(String newpwd);
 
   public TbUser register(TbUser user) throws Exception;
-
-  public TbUser update(TbUser user);
-
-  public TbUser saveOrUpdate(TbUser user);
-
-  public TbUser delete(TbUser user);
 }

@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.util.StringUtil;
 import com.sword.smvcm.exception.SmvcmException;
+import com.sword.smvcm.service.base.BaseService;
 import com.sword.smvcm.shiro.service.PasswordService;
 import com.sword.smvcm.users.i.UserService;
 import com.sword.smvcm.users.mapper.TbRoleMapper;
@@ -26,8 +29,10 @@ import com.sword.smvcm.users.pojo.TbUserRole;
 import com.sword.smvcm.users.pojo.TbUserRoleExample;
 import com.sword.smvcm.utils.RandomUtils;
 
+import tk.mybatis.mapper.entity.Example;
+
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseService<TbUser> implements UserService {
 
   @Autowired
   TbUserMapper userMapper;
@@ -45,12 +50,7 @@ public class UserServiceImpl implements UserService {
   PasswordService passwordService;
 
   @Override
-  public TbUser findUserById(Integer userId) {
-    return userMapper.selectByPrimaryKey(userId);
-  }
-
-  @Override
-  public TbUser findUserByUsername(String username) {
+  public TbUser getByUsername(String username) {
     TbUserExample _userexample = new TbUserExample();
     TbUserExample.Criteria criteria = _userexample.createCriteria();
     criteria.andUsernameEqualTo(username);
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public TbUser findUserByMobile(String mobile) {
+  public TbUser getByMobile(String mobile) {
     TbUserExample _userexample = new TbUserExample();
     TbUserExample.Criteria criteria = _userexample.createCriteria();
     criteria.andMobileEqualTo(mobile);
@@ -80,8 +80,29 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<TbRolePermission> findUserPermission(TbUser user) {
-    List<TbRole> role = findUserRole(user);
+  public List<TbUser> selectByUser(TbUser user, int page, int row) {
+    Example example = new Example(TbUser.class);
+    Example.Criteria criteria = example.createCriteria();
+    if (StringUtil.isNotEmpty(user.getUsername())) {
+      criteria.andLike("username", user.getUsername());
+    }
+    if (StringUtil.isNotEmpty(user.getRealname())) {
+      criteria.andLike("realname", user.getRealname());
+    }
+    if (StringUtil.isNotEmpty(user.getMobile())) {
+      criteria.andLike("mobile", user.getMobile());
+    }
+    if (user.getId() != null) {
+      criteria.andEqualTo("id", user.getId());
+    }
+    // 分页查询
+    PageHelper.startPage(page, row);
+    return selectByExample(example);
+  }
+
+  @Override
+  public List<TbRolePermission> selectUserPermission(TbUser user) {
+    List<TbRole> role = selectUserRole(user);
     if (CollectionUtils.isEmpty(role)) {
       return null;
     }
@@ -96,13 +117,13 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<TbRolePermission> findUserPermissionByUsername(String username) {
-    TbUser user = findUserByUsername(username);
-    return findUserPermission(user);
+  public List<TbRolePermission> selectUserPermission(String username) {
+    TbUser user = getByUsername(username);
+    return selectUserPermission(user);
   }
 
   @Override
-  public List<TbRole> findUserRole(TbUser user) {
+  public List<TbRole> selectUserRole(TbUser user) {
     // 先查询关系
     TbUserRoleExample userRoleExample = new TbUserRoleExample();
     TbUserRoleExample.Criteria userRoleCriteria = userRoleExample.createCriteria();
@@ -123,9 +144,9 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<TbRole> findUserRoleByUsername(String username) {
-    TbUser user = findUserByUsername(username);
-    return findUserRole(user);
+  public List<TbRole> selectUserRole(String username) {
+    TbUser user = getByUsername(username);
+    return selectUserRole(user);
   }
 
   @Override
@@ -175,31 +196,6 @@ public class UserServiceImpl implements UserService {
     user.setCreateTime(new Date());
     user = passwordUser(user);
     userMapper.insert(user);
-    return user;
-  }
-
-  @Override
-  public TbUser update(TbUser user) {
-    userMapper.updateByPrimaryKeySelective(passwordUser(user));
-    return findUserById(user.getId());
-  }
-
-  @Override
-  public TbUser saveOrUpdate(TbUser user) {
-    if (user.getId() == null) {
-      userMapper.insert(user);
-    }
-    else {
-      userMapper.updateByPrimaryKey(user);
-    }
-    return user;
-  }
-
-  @Override
-  public TbUser delete(TbUser user) {
-    if (user.getId() != null) {
-      userMapper.deleteByPrimaryKey(user.getId());
-    }
     return user;
   }
 

@@ -1,4 +1,4 @@
-package com.sword.smvcm.service;
+package com.sword.smvcm.service.jedis;
 
 import java.util.Set;
 

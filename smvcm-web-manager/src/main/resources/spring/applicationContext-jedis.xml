@@ -38,7 +38,7 @@
 		<!-- <constructor-arg name="password" value="${jedis.pwd}" /> -->
 		<constructor-arg name="poolConfig" ref="jedisPoolConfig" />
 	</bean>
-	<bean id="jedisClient" class="com.sword.smvcm.service.JedisClientSingleImpl" />
+	<bean id="jedisClient" class="com.sword.smvcm.service.jedis.JedisClientSingleImpl" />
 	<!-- jedis集群版配置 <bean id="redisClient" class="redis.clients.jedis.JedisCluster"> 
 		<constructor-arg name="nodes"> <set> <bean class="redis.clients.jedis.HostAndPort"> 
 		<constructor-arg name="host" value="192.168.25.153"></constructor-arg> <constructor-arg 

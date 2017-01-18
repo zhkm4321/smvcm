@@ -14,8 +14,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 
 import com.sword.smvcm.exception.SmvcmException;
-import com.sword.smvcm.service.JedisClient;
-import com.sword.smvcm.service.JedisClientSingleImpl;
+import com.sword.smvcm.service.jedis.JedisClient;
+import com.sword.smvcm.service.jedis.JedisClientSingleImpl;
 import com.sword.smvcm.shiro.ShiroConstants;
 
 @Component

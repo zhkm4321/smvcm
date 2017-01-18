@@ -15,17 +15,17 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.sword.smvcm.config.i.ConfigService;
+import com.sword.smvcm.config.i.IConfigService;
 import com.sword.smvcm.config.mapper.TbConfigMapper;
 import com.sword.smvcm.config.pojo.TbConfig;
 import com.sword.smvcm.config.pojo.TbConfigExample;
-import com.sword.smvcm.service.JedisClient;
+import com.sword.smvcm.service.jedis.JedisClient;
 import com.sword.smvcm.utils.StringUtils;
 
-@Service("configService")
-public class ConfigServiceImpl implements ConfigService {
+@Service("smvcmConfigService")
+public class SmvcmConfigServiceImpl implements IConfigService {
 
-  private static Logger log = LoggerFactory.getLogger(ConfigServiceImpl.class);
+  private static Logger log = LoggerFactory.getLogger(SmvcmConfigServiceImpl.class);
 
   private TbConfigMapper configMapper;
 

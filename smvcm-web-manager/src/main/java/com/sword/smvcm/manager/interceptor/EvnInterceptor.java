@@ -57,7 +57,7 @@ public class EvnInterceptor extends HandlerInterceptorAdapter {
   }
 
   private Set<String> getUserPermission(TbUser user) {
-    List<TbRolePermission> perms = userSvc.findUserPermission(user);
+    List<TbRolePermission> perms = userSvc.selectUserPermission(user);
     Set<String> permSet = new HashSet<String>();
     if (!CollectionUtils.isEmpty(perms)) {
       for (TbRolePermission permi : perms) {

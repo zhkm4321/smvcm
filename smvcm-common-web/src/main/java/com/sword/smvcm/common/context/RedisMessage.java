@@ -2,7 +2,7 @@ package com.sword.smvcm.common.context;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sword.smvcm.service.JedisClient;
+import com.sword.smvcm.service.jedis.JedisClient;
 import com.sword.smvcm.utils.SerializeUtils;
 
 public class RedisMessage implements MessageService {

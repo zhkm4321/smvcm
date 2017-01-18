@@ -17,7 +17,7 @@
 	<!-- weixinmp模块的配置 -->
 	<bean id="wxMpConfigStorage" class="com.sword.smvcm.service.impl.WxConfigServiceImpl"
 		init-method="init">
-		<property name="configSvc" ref="configService"></property>
+		<property name="configSvc" ref="smvcmConfigService"></property>
 	</bean>
 
 	<!-- weixinmp模块api服务 -->

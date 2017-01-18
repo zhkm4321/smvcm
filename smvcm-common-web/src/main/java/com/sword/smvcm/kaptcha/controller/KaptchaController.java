@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.dubbo.common.json.JSON;
 import com.google.code.kaptcha.Producer;
 import com.google.code.kaptcha.util.Config;
-import com.sword.smvcm.service.JedisClient;
+import com.sword.smvcm.service.jedis.JedisClient;
 import com.sword.smvcm.shiro.ShiroConstants;
 import com.sword.smvcm.utils.CaptchaUtils;
 

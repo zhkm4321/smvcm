@@ -12,7 +12,7 @@ import com.sword.smvcm.config.pojo.TbConfig;
  * @author zhenghang
  * @version 创建时间：2016年12月11日 下午5:31:24
  */
-public interface ConfigService extends BeanFactoryAware {
+public interface IConfigService extends BeanFactoryAware {
 
   public static String GLOBAL_CONFIG_PREFIX = "GLOBAL_CONFIG_";
 

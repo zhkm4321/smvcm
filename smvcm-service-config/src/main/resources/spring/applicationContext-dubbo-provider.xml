@@ -28,6 +28,6 @@
     <dubbo:protocol name="dubbo" serialization="kryo" dispatcher="all" threadpool="fixed" threads="20" port="28882" />
 
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.sword.smvcm.config.i.ConfigService" ref="configService" retries="0" timeout="20000"/>
+    <dubbo:service interface="com.sword.smvcm.config.i.IConfigService" ref="smvcmConfigService" retries="0" timeout="20000"/>
 
 </beans>

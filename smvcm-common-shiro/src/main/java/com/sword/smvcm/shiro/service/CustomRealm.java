@@ -48,7 +48,7 @@ public class CustomRealm extends AuthorizingRealm {
     // 第二步：根据用户输入的userCode从数据库查询
     TbUser user = null;
     try {
-      user = userService.findUserByUsername(loginName);
+      user = userService.getByUsername(loginName);
     }
     catch (Exception e1) {
       e1.printStackTrace();
@@ -90,8 +90,8 @@ public class CustomRealm extends AuthorizingRealm {
     TbUser activeUser = (TbUser) principals.getPrimaryPrincipal();
 
     // 从数据库获取角色
-    List<TbRole> roleList = userService.findUserRole(activeUser);
-    List<TbRolePermission> permissionList = userService.findUserPermission(activeUser);
+    List<TbRole> roleList = userService.selectUserRole(activeUser);
+    List<TbRolePermission> permissionList = userService.selectUserPermission(activeUser);
     List<String> roles = new ArrayList<String>();
     if (roleList != null) {
       for (TbRole r : roleList) {

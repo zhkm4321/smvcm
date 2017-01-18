@@ -13,7 +13,7 @@ import org.apache.shiro.util.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sword.smvcm.service.JedisClient;
+import com.sword.smvcm.service.jedis.JedisClient;
 import com.sword.smvcm.utils.SerializeUtils;
 
 public class RedisCache<K, V> implements Cache<K, V> {

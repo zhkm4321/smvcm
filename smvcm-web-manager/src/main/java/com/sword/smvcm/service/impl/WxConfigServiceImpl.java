@@ -1,22 +1,22 @@
 package com.sword.smvcm.service.impl;
 
-import static com.sword.smvcm.config.i.ConfigService.GROUP_WXCONFIG;
-import static com.sword.smvcm.config.i.ConfigService.WXCONFIG_AES_KEY;
-import static com.sword.smvcm.config.i.ConfigService.WXCONFIG_APPID;
-import static com.sword.smvcm.config.i.ConfigService.WXCONFIG_PARTNER_ID;
-import static com.sword.smvcm.config.i.ConfigService.WXCONFIG_PARTNER_KEY;
-import static com.sword.smvcm.config.i.ConfigService.WXCONFIG_SECRET;
-import static com.sword.smvcm.config.i.ConfigService.WXCONFIG_TOKEN;
+import static com.sword.smvcm.config.i.IConfigService.GROUP_WXCONFIG;
+import static com.sword.smvcm.config.i.IConfigService.WXCONFIG_AES_KEY;
+import static com.sword.smvcm.config.i.IConfigService.WXCONFIG_APPID;
+import static com.sword.smvcm.config.i.IConfigService.WXCONFIG_PARTNER_ID;
+import static com.sword.smvcm.config.i.IConfigService.WXCONFIG_PARTNER_KEY;
+import static com.sword.smvcm.config.i.IConfigService.WXCONFIG_SECRET;
+import static com.sword.smvcm.config.i.IConfigService.WXCONFIG_TOKEN;
 
-import com.sword.smvcm.config.i.ConfigService;
+import com.sword.smvcm.config.i.IConfigService;
 
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 
 public class WxConfigServiceImpl extends WxMpInMemoryConfigStorage {
 
-  private ConfigService configSvc;
+  private IConfigService configSvc;
 
-  public void setConfigSvc(ConfigService configSvc) {
+  public void setConfigSvc(IConfigService configSvc) {
     this.configSvc = configSvc;
   }
 

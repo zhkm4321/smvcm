@@ -28,6 +28,6 @@
     <dubbo:protocol name="dubbo" serialization="kryo" dispatcher="all" threadpool="fixed" threads="20" port="28883" />
 
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service  retries="0" interface="com.sword.smvcm.email.i.EMailService" ref="eMailService"  />
+    <dubbo:service  interface="com.sword.smvcm.email.i.EMailService" ref="eMailService" retries="0" />
 
 </beans>

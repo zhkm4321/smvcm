@@ -20,7 +20,7 @@
 	</bean>
 
 	<!-- 配置扫描包，加载mapper代理对象 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.sword.smvcm.wx.menu.mapper"></property>
 		<property name="sqlSessionFactoryBeanName" value="masterSqlSessionFactory" />
 	</bean>
@@ -69,7 +69,7 @@
 		<property name="minIdle" value="5" />
 	</bean>
 	<!-- 配置扫描包，加载mapper代理对象 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.sword.smvcm.wx.menu.mapper"></property>
 		<property name="sqlSessionFactoryBeanName" value="readSqlSessionFactory" />
 	</bean>

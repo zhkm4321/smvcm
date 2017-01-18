@@ -41,6 +41,12 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>dubbo</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-expression</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- zkclient -->
 		<dependency>
@@ -136,7 +142,7 @@
 					<classesDirectory>target/classes/</classesDirectory>
 					<archive>
 						<manifest>
-							<mainClass>com.sword.smvcm.config.service.DubboProvider</mainClass>
+							<mainClass>com.alibaba.dubbo.container.Main</mainClass>
 							<!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
 							<useUniqueVersions>false</useUniqueVersions>
 							<addClasspath>true</addClasspath>

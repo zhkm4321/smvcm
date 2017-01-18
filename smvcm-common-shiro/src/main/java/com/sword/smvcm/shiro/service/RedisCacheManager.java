@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sword.smvcm.service.JedisClient;
+import com.sword.smvcm.service.jedis.JedisClient;
 
 /**
  * Created by Administrator on 2016/3/13.
