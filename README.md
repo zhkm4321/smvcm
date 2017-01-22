@@ -5,6 +5,7 @@ springmvc		4.3.3.RELEASE<br /\>
 mybatis			3.3.0<br /\>
 mysql			<br /\>
 [Mapper			3.3.6](https://github.com/abel533/Mapper)(Mybatis Common Mapper)<br /\>
+[pagehelper		5.0.0](https://github.com/pagehelper/Mybatis-PageHelper/blob/master/README_zh.md)<br /\>
 [dubbox			2.8.4](https://github.com/zhkm4321/dubbox/)<br /\>
 ### 工程备注<br /\>
 smvcm-facade-users			用户名服务消费者模块<br /\>
